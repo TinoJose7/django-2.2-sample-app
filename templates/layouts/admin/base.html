@@ -1,0 +1,29 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Django 2.2</title>
+
+    {% include "layouts/admin/partials/styles.html" %}
+  </head>
+
+  <body>
+    {% include "layouts/admin/partials/header.html" %}
+
+    <div class="container-fluid">
+      <div class="row">
+      {% include "layouts/admin/partials/sidebar.html" %}
+      {% block content %}
+      {% endblock %}
+      </div>
+    </div>
+    {% include "layouts/admin/partials/scripts.html" %}
+  </body>
+</html>

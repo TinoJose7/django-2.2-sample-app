@@ -1,0 +1,55 @@
+{% extends  'layouts/admin/base.html' %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Users</h1>
+    <div class="btn-group mr-2">
+      <a href="{% url 'users:create' %}" class="btn btn-sm btn-outline-success">Create</a>
+    </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Username</th>
+          <th>Joined At</th>
+          <td>#</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in latest_user_list %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ user.first_name }} {{ user.last_name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.date_joined }}</td>
+          <td>
+            <div class="dropdown show">
+              <a class="btn btn-sm btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'users:show' user.id %}">View</a>
+                <a class="dropdown-item" href="{% url 'users:edit' user.id %}">Edit</a>
+                <form action="{% url "users:delete" user.id %}" method="post">
+                  {% csrf_token %}
+                  <button class="dropdown-item" onclick="return confirm('Are you sure?');">Delete</button>
+                </form>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+</main>
+{% endblock content %}

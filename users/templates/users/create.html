@@ -1,0 +1,39 @@
+{% extends  'layouts/admin/base.html' %}
+{% block content %}
+<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+	<form id="user-create" method="post">
+		{% csrf_token %}
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label>First Name</label>
+				<input type="text" name="first_name" class="form-control" placeholder="First Name">
+			</div>
+			<div class="form-group col-md-6">
+				<label>Last Name</label>
+				<input type="text" name="last_name" class="form-control" placeholder="Last Name">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label>Username</label>
+				<input type="text" name="username" class="form-control" placeholder="Username">
+			</div>
+			<div class="form-group col-md-6">
+				<label>Email</label>
+				<input type="email" name="email" class="form-control"placeholder="Email">
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label>Password</label>
+				<input type="password" name="password" class="form-control" placeholder="Password">
+			</div>
+			<div class="form-group col-md-6">
+				<label>Confirm Password</label>
+				<input type="password" name="confirm_password" class="form-control"placeholder="Confirm Password">
+			</div>
+		</div>
+		<a href="{% url 'users:index' %}" class="btn btn-secondary">Cancel</a>
+		<button type="submit" class="btn btn-success">Create</button>
+</main>
+{% endblock content %}

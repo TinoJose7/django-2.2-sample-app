@@ -1,0 +1,58 @@
+{% extends 'layouts/auth/base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+
+<form class="form-signin" action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <div class="text-center mb-4">
+        <img class="mb-4" src="{% static 'logo.svg' %}" alt="" width="180" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+    </div>
+    {% if next %}
+    {% if user.is_authenticated %}
+    <div class="alert alert-danger fade show alert-dismissible" style="margin-bottom:22px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.
+    </div>
+    {% else %}
+    <div class="alert alert-danger fade show alert-dismissible" style="margin-bottom:22px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        Please login to see this page.
+    </div>
+    {% endif %}
+    {% endif %}
+    {% if form.errors %}
+    <div class="alert alert-danger fade show alert-dismissible" style="margin-bottom:22px">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+        <strong>Invalid Login!</strong> These credentials do not match our records.
+    </div>
+    {% endif %}
+    <div class="form-label-group">
+        <input type="text" name="{{ form.username.name }}" id="inputEmail"
+            class="form-control {% if form.errors %} is-invalid {% endif %}" placeholder="Email address" required
+            autofocus>
+        <label for="inputEmail">Email address</label>
+    </div>
+
+    <div class="form-label-group">
+        <input type="password" name="{{ form.password.name }}" id="inputPassword"
+            class="form-control {% if form.errors %} is-invalid {% endif %}" placeholder="Password" required>
+        <label for="inputPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <a href="{% url 'password_reset' %}" class="float-right">Forgot Password</a>
+    </div>
+
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted text-center">&copy; 2019-2020</p>
+</form>
+{% endblock content %}
